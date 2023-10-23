@@ -40,12 +40,11 @@ restart_klipper() {
 }
 
 build_linux_mcu_fw() {
-    local cpu_count nice_count
+    local cpu_count
     cpu_count="$(nproc)"
-    nice_count=$((cpu_count - 1))
-    printf "Trying to build linux-host-mcu with %d cpu cores ...\n" "${nice_count}"
+    printf "Trying to build linux-host-mcu with %d cpu cores ...\n" "${cpu_count}"
     pushd ~/klipper &> /dev/null
-    make -j"${nice_count}"
+    make -j"${cpu_count}"
 }
 
 ### Ask for sudo!
