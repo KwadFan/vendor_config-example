@@ -37,11 +37,10 @@ fi
 
 ### Clean up, from previous builds
 if [[ -d ~/klipper ]]; then
-    pushd ~/klipper &> /dev/null
+    cd ~/klipper
     printf "Clean up previous builds ...\n"
     make clean
     make distclean
-    popd &> /dev/null
 else
     printf "OOOPS! Something went wrong. Klipper seems not to be installed!"
     exit 1
