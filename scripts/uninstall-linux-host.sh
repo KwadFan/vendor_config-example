@@ -59,35 +59,12 @@ main() {
 
 ### Helper funcs
 
-ask_for_sudo() {
-    printf "Some actions require 'sudo' permissions!\n"
-    printf "Please type in your sudo password if asked!\n"
-    #### workaround, sudo password will be stored during session
-    sudo printf "\n"
-}
-
-stop_klipper() {
-    if systemctl is-active --quiet klipper.service ;then
-        printf "Trying to stop 'klipper.service' ...\n"
-        sudo systemctl stop klipper.service
-    else
-        printf "Klipper service seems not running, continue...\n"
-    fi
-}
-
 stop_klipper_mcu() {
     if systemctl is-active --quiet klipper_mcu.service ;then
         printf "Trying to stop 'klipper_mcu.service' ...\n"
         sudo systemctl stop klipper_mcu.service
     else
         printf "Klipper_mcu service seems not running, continue...\n"
-    fi
-}
-
-restart_klipper() {
-    if ! systemctl is-active --quiet klipper.service ;then
-        printf "Trying to restart 'klipper.service' ...\n"
-        sudo systemctl start klipper.service
     fi
 }
 

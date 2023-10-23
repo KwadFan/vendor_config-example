@@ -100,7 +100,7 @@ install_linux_host_mcu_service() {
 }
 
 enable_linux_host_mcu_service() {
-    enable_service klipper_mcu.service
+    enable_service klipper-mcu.service
 }
 
 #### MAIN
