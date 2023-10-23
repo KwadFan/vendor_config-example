@@ -102,9 +102,8 @@ disable_linux_host_mcu_service() {
 }
 
 remove_linux_host_mcu_service() {
-    printf "Trying to install service file ...\n"
+    printf "Trying to uninstall service file ...\n"
     if [[ -f /etc/systemd/system/klipper-mcu.service ]]; then
-        printf "Trying to remove klipper-mcu.service file...\n"
         sudo rm -fv /etc/systemd/system/klipper-mcu.service
     else
         printf "Service seems not to be already installed... Skipped!\n"
