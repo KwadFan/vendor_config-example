@@ -37,14 +37,19 @@ fi
 
 ### Clean up, from previous builds
 if [[ -d ~/klipper ]]; then
-    cd ~/klipper
+    pushd ~/klipper &> /dev/null
     printf "Clean up previous builds ...\n"
     make clean
     make distclean
+    popd &> /dev/null
 else
     printf "OOOPS! Something went wrong. Klipper seems not to be installed!"
     exit 1
 fi
+
+### Copy config
+
+echo "$PWD"
 
 ### build firmware
 
