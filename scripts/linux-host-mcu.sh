@@ -28,6 +28,15 @@ printf "Please type in your sudo password if asked!\n"
 sudo printf "\n"
 
 ### Stop klipper first!
+if systemctl is-active klipper.service ;then
+    printf "Trying to stop 'klipper.service' ...\n"
+    sudo systemctl stop klipper.service
+else
+    printf "Klipper service seems not running, continue...\n"
+fi
+### Clean up, from previous builds
+
+### build firmware
 
 printf "Hellloooo foo!\n"
 
