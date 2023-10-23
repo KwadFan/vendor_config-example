@@ -1,0 +1,6 @@
+
+[update_manager vendor_config-example]
+type: git_repo
+path: ~/printer_data/config/vendor_config-example
+origin: https://github.com/KwadFan/vendor_config-example.git
+primary_branch: main
