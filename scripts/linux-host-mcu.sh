@@ -23,6 +23,13 @@ set -Ee
 
 ### MAIN
 main() {
+
+    ### import core library
+    # shellcheck disable=SC1091
+    . libs/core.sh
+
+    printf "Trying to install klipper_mcu and the acccording service ...\n"
+
     ### Ask for sudo!
     ask_for_sudo
 
@@ -33,7 +40,7 @@ main() {
     clean_previous_builds
 
     ### Copy config
-    copy_config
+    copy_linux_host_mcu_config
 
     ### build firmware
     build_linux_mcu_fw
@@ -59,52 +66,10 @@ main() {
 
 ### Helper funcs
 
-ask_for_sudo() {
-    printf "Some actions require 'sudo' permissions!\n"
-    printf "Please type in your sudo password if asked!\n"
-    #### workaround, sudo password will be stored during session
-    sudo printf "\n"
-}
 
-clean_previous_builds() {
-    if [[ -d ~/klipper ]]; then
-        pushd ~/klipper &> /dev/null
-        printf "Clean up previous builds ...\n"
-        make clean
-        make distclean
-        popd &> /dev/null
-    else
-        printf "OOOPS! Something went wrong. Klipper seems not to be installed! Exiting ..."
-        restart_klipper
-        exit 1
-    fi
-}
 
-copy_config() {
-    printf "Trying to copy linux-host-mcu config file to appropriate location ...\n"
-    if [[ -d "${PWD}/firmware_configs/linux-host-mcu" ]]; then
-        cp -v "${PWD}/firmware_configs/linux-host-mcu/config" ~/klipper/.config
-    else
-        printf "OOOPS! Something went wrong. config is missing! Exiting ...\n"
-        restart_klipper
-        exit 1
-    fi
-}
-
-stop_klipper() {
-    if systemctl is-active --quiet klipper.service ;then
-        printf "Trying to stop 'klipper.service' ...\n"
-        sudo systemctl stop klipper.service
-    else
-        printf "Klipper service seems not running, continue...\n"
-    fi
-}
-
-restart_klipper() {
-    if ! systemctl is-active --quiet klipper.service ;then
-        printf "Trying to restart 'klipper.service' ...\n"
-        sudo systemctl start klipper.service
-    fi
+copy_linux_host_mcu_config() {
+    copy_config linux-host-mcu
 }
 
 build_linux_mcu_fw() {
@@ -135,13 +100,7 @@ install_linux_host_mcu_service() {
 }
 
 enable_linux_host_mcu_service() {
-    if [[ -f /etc/systemd/system/klipper-mcu.service ]] \
-    && [[ "$(systemctl is-enabled klipper-mcu.service)" == "disabled" ]]; then
-        printf "Trying to enable klipper-mcu.service ...\n"
-        sudo systemctl enable klipper-mcu.service
-    else
-        printf "Service 'klipper-mcu.service' already enabled ...\n"
-    fi
+    enable_service klipper_mcu.service
 }
 
 #### MAIN

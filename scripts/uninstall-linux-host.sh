@@ -22,6 +22,11 @@ set -Ee
 
 ### MAIN
 main() {
+
+    ### import core library
+    # shellcheck disable=SC1091
+    . libs/core.sh
+
     printf "Trying to uninstall klipper_mcu and the acccording service ...\n"
 
     ### Ask for sudo!
