@@ -25,8 +25,8 @@ set -Ee
 main() {
 
     ### import core library
-    # shellcheck disable=SC1091
-    . libs/core.sh
+    # shellcheck source=lib/core.sh
+    . lib/core.sh
 
     printf "Trying to install klipper_mcu and the acccording service ...\n"
 

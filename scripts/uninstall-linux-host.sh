@@ -25,7 +25,7 @@ main() {
 
     ### import core library
     # shellcheck disable=SC1091
-    . libs/core.sh
+    . lib/core.sh
 
     printf "Trying to uninstall klipper_mcu and the acccording service ...\n"
 
