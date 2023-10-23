@@ -21,7 +21,67 @@ set -Ee
 ## Debug
 # set -x
 
+### MAIN
+main() {
+    ### Ask for sudo!
+    ask_for_sudo
+
+    ### Stop klipper first!
+    stop_klipper
+
+    ### Clean up, from previous builds
+    clean_previous_builds
+
+    ### Copy config
+    copy_config
+
+    ### build firmware
+    build_linux_mcu_fw
+    install_linux_host_mcu
+
+    ### Restart klipper service
+    restart_klipper
+
+    ### Done message
+    printf "Build and Install of linux-host-mcu done!\nGood bye...\n"
+
+    exit 0
+}
+
+
 ### Helper funcs
+
+ask_for_sudo() {
+    printf "Some actions require 'sudo' permissions!\n"
+    printf "Please type in your sudo password if asked!\n"
+    #### workaround, sudo password will be stored during session
+    sudo printf "\n"
+}
+
+clean_previous_builds() {
+    if [[ -d ~/klipper ]]; then
+        pushd ~/klipper &> /dev/null
+        printf "Clean up previous builds ...\n"
+        make clean
+        make distclean
+        popd &> /dev/null
+    else
+        printf "OOOPS! Something went wrong. Klipper seems not to be installed! Exiting ..."
+        restart_klipper
+        exit 1
+    fi
+}
+
+copy_config() {
+    printf "Trying to copy linux-host-mcu config file to appropriate location ...\n"
+    if [[ -d "${PWD}/firmware_configs/linux-host-mcu" ]]; then
+        cp -v "${PWD}/firmware_configs/linux-host-mcu/config" ~/klipper/.config
+    else
+        printf "OOOPS! Something went wrong. config is missing! Exiting ...\n"
+        restart_klipper
+        exit 1
+    fi
+}
 
 stop_klipper() {
     if systemctl is-active --quiet klipper.service ;then
@@ -48,45 +108,12 @@ build_linux_mcu_fw() {
     popd &> /dev/null
 }
 
-### Ask for sudo!
-printf "Some actions require 'sudo' permissions!\n"
-printf "Please type in your sudo password if asked!\n"
-#### workaround, sudo password will be stored during session
-sudo printf "\n"
-
-### Stop klipper first!
-stop_klipper
-
-### Clean up, from previous builds
-if [[ -d ~/klipper ]]; then
+install_linux_host_mcu() {
+    printf "Trying to build linux-host-mcu with %d cpu cores ...\n" "${cpu_count}"
     pushd ~/klipper &> /dev/null
-    printf "Clean up previous builds ...\n"
-    make clean
-    make distclean
+    make -j"${cpu_count}"
     popd &> /dev/null
-else
-    printf "OOOPS! Something went wrong. Klipper seems not to be installed! Exiting ..."
-    restart_klipper
-    exit 1
-fi
+}
 
-### Copy config
-printf "Trying to copy linux-host-mcu config file to appropriate location ...\n"
-if [[ -d "${PWD}/firmware_configs/linux-host-mcu" ]]; then
-    cp -v "${PWD}/firmware_configs/linux-host-mcu/config" ~/klipper/.config
-else
-    printf "OOOPS! Something went wrong. config is missing! Exiting ...\n"
-    restart_klipper
-    exit 1
-fi
-
-### build firmware
-build_linux_mcu_fw
-
-### Restart klipper service
-restart_klipper
-
-### Done message
-printf "Build and Install of linux-host-mcu done!\nGood bye...\n"
-
-exit 0
+#### MAIN
+main
