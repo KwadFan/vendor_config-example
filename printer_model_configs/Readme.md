@@ -2,7 +2,7 @@
 
 Copy the `printer.cfg`according to your printer to your `printer_data/config` folder!
 
-For example if a `The100` is used pick the one from the100 folder.
+For example if a `The100` is used, pick the one from the100 folder.
 
 ## linux-host-mcu
 
@@ -14,3 +14,8 @@ please add
 ```
 
 to your `printer.cfg``
+
+---
+
+This is only part of a "Hello vendor_config" example,
+write down what ever you want to tell the user ...
