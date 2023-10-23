@@ -38,6 +38,7 @@ main() {
     ### build firmware
     build_linux_mcu_fw
     install_linux_host_mcu
+    install_linux_host_mcu_service
 
     ### Restart klipper service
     restart_klipper
@@ -113,6 +114,17 @@ install_linux_host_mcu() {
     pushd ~/klipper &> /dev/null
     make flash
     popd &> /dev/null
+}
+
+install_linux_host_mcu_service() {
+    printf "Trying to install service file ...\n"
+    if [[ -f /etc/systemd/system/klipper-mcu.service ]]; then
+        printf "Service seems to be already installed... Skipped!"
+    else
+        pushd ~/klipper &> /dev/null
+        sudo cp -v ./scripts/klipper-mcu.service /etc/systemd/system/
+        popd &> /dev/null
+    fi
 }
 
 #### MAIN
