@@ -109,9 +109,9 @@ build_linux_mcu_fw() {
 }
 
 install_linux_host_mcu() {
-    printf "Trying to build linux-host-mcu with %d cpu cores ...\n" "${cpu_count}"
+    printf "Trying to install linux-host-mcu ...\n"
     pushd ~/klipper &> /dev/null
-    make -j"${cpu_count}"
+    make flash
     popd &> /dev/null
 }
 
