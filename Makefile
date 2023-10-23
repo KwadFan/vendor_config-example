@@ -19,6 +19,7 @@ btt-skrpico-v1.0: ## Compiles Firmware for BTT SKR pico V1.0
 
 linux-host-mcu: ## Compiles and installs new linux-host-mcu
 	@printf "This will take a while ... Please be patient!"
+	@bash -c 'scripts/linux-host-mcu.sh'
 
 update: ## Tries to pull latest updates from repository
 	@printf "Fetch and pull from remote repository ...\n"
