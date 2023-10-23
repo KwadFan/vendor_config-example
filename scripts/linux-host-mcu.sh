@@ -37,8 +37,15 @@ main() {
 
     ### build firmware
     build_linux_mcu_fw
+
+    ### Install linux-host-mcu binary (/usr/local/bin/klipper_mcu)
     install_linux_host_mcu
+
+    ### Install systemd service file
     install_linux_host_mcu_service
+
+    ### Enable klipper_mcu service
+    enable_linux_host_mcu_service
 
     ### Restart klipper service
     restart_klipper
@@ -119,11 +126,21 @@ install_linux_host_mcu() {
 install_linux_host_mcu_service() {
     printf "Trying to install service file ...\n"
     if [[ -f /etc/systemd/system/klipper-mcu.service ]]; then
-        printf "Service seems to be already installed... Skipped!"
+        printf "Service seems to be already installed... Skipped!\n"
     else
         pushd ~/klipper &> /dev/null
         sudo cp -v ./scripts/klipper-mcu.service /etc/systemd/system/
         popd &> /dev/null
+    fi
+}
+
+enable_linux_host_mcu_service() {
+    if [[ -f /etc/systemd/system/klipper-mcu.service ]] \
+    && [[ "$(systemctl is-enabled klipper-mcu.service)" == "disabled" ]]; then
+        printf "Trying to enable klipper-mcu.service ...\n"
+        sudo systemctl enable klipper-mcu.service
+    else
+        printf "Service 'klipper-mcu.service' already enabled ...\n"
     fi
 }
 
