@@ -1,0 +1,4 @@
+# Ignore Binary files
+# NOTE: These has to be kept, to keep this repo updateable
+firmware_binaries/**/*.bin
+firmware_binaries/**/*.uf2
