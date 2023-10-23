@@ -21,6 +21,14 @@ set -Ee
 ## Debug
 # set -x
 
+### Ask for sudo!
+printf "Some actions require 'sudo' permissions!\n"
+printf "Please type in your sudo password if asked!"
+#### workaround, sudo password will be stored during session
+sudo printf "\n"
+
+### Stop klipper first!
+
 printf "Hellloooo foo!\n"
 
 exit 0
