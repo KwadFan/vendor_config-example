@@ -14,18 +14,22 @@
 .PHONY: help
 
 
-btt-skrpico-v1.0: ## Compiles Firmware for BTT SKR pico V1.0
+btt-skrpico-v1.0: ## Compiles Firmware for BTT SKR pico V1.0.
 	@printf "This will take a while ... Please be patient!\n"
 
-linux-host-mcu: ## Compiles and installs new linux-host-mcu
+linux-host-mcu: ## Compiles and installs new linux-host-mcu.
 	@printf "This will take a while ... Please be patient!\n"
 	@bash -c 'scripts/linux-host-mcu.sh'
 
-update: ## Tries to pull latest updates from repository
+uninstall-linux-host: ## Uninstalls linux-host-mcu (klipper_mcu) completly.
+	@printf "This will take a while ... Please be patient!\n"
+	@bash -c 'scripts/uninstall-linux-host.sh'
+
+update: ## Tries to pull latest updates from repository.
 	@printf "Fetch and pull from remote repository ...\n"
 	@git fetch && git pull
 
-help: ## Shows this help
+help: ## Shows this help.
 	@printf "vendor_config helper\n"
 	@printf "Usage:\n\n"
 	@grep -E '^[0-9a-zA-Z._-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
