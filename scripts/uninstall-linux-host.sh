@@ -23,9 +23,9 @@ set -Ee
 ### MAIN
 main() {
 
-    ### import core library
-    # shellcheck disable=SC1091
-    . lib/core.sh
+    ### Import core library
+    # shellcheck source=lib/core.sh
+    . scripts/lib/core.sh
 
     printf "Trying to uninstall klipper_mcu and the acccording service ...\n"
 
