@@ -45,6 +45,7 @@ build_linux_mcu_fw() {
     printf "Trying to build linux-host-mcu with %d cpu cores ...\n" "${cpu_count}"
     pushd ~/klipper &> /dev/null
     make -j"${cpu_count}"
+    popd &> /dev/null
 }
 
 ### Ask for sudo!
@@ -72,7 +73,7 @@ fi
 ### Copy config
 printf "Trying to copy linux-host-mcu config file to appropriate location ...\n"
 if [[ -d "${PWD}/firmware_configs/linux-host-mcu" ]]; then
-    cp "${PWD}/firmware_configs/linux-host-mcu/config" ~/klipper/.config
+    cp -v "${PWD}/firmware_configs/linux-host-mcu/config" ~/klipper/.config
 else
     printf "OOOPS! Something went wrong. config is missing! Exiting ...\n"
     restart_klipper
