@@ -23,6 +23,17 @@ If that is done it will copy the output file to the appropriate folder.
 
 The directory structure is also up to you but my thought was here, it should really describe what it contains, this will be easier for 'non-techsave' users ...
 
+To update this repo on installed images you could abuse moonraker.
+Simply add, according to this example, the following entry
+
+```toml
+[update_manager vendor_config-example]
+type: git_repo
+path: ~/printer_data/config/vendor_config-example
+origin: https://github.com/KwadFan/vendor_config-example.git
+primary_branch: main
+```
+
 ---
 
 This is only part of a "Hello vendor_config" example,
