@@ -14,6 +14,6 @@
 .PHONY: help
 
 help: ## Shows this help
-	@printf "crowsnest - A webcam Service for multiple Cams and Stream Services.\n"
+	@printf "vendor_config helper\n"
 	@printf "Usage:\n\n"
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
