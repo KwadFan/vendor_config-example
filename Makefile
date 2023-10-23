@@ -21,6 +21,7 @@ linux-host-mcu: ## Compiles and installs new linux-host-mcu
 	@printf "This will take a while ... Please be patient!"
 
 update: ## Tries to pull latest updates from repository
+	@printf "Fetch and pull from remote repository ...\n"
 	@git fetch && git pull
 
 help: ## Shows this help
