@@ -23,7 +23,7 @@ set -Ee
 
 ### Ask for sudo!
 printf "Some actions require 'sudo' permissions!\n"
-printf "Please type in your sudo password if asked!"
+printf "Please type in your sudo password if asked!\n"
 #### workaround, sudo password will be stored during session
 sudo printf "\n"
 
