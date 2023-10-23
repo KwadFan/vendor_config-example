@@ -34,7 +34,18 @@ if systemctl is-active --quiet klipper.service ;then
 else
     printf "Klipper service seems not running, continue...\n"
 fi
+
 ### Clean up, from previous builds
+if [[ -d ~/klipper ]]; then
+    pushd ~/klipper &> /dev/null
+    printf "Clean up previous builds ...\n"
+    make clean
+    make distclean
+    popd &> /dev/null
+else
+    printf "OOOPS! Something went wrong. Klipper seems not to be installed!"
+    exit 1
+fi
 
 ### build firmware
 
