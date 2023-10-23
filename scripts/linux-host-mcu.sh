@@ -39,6 +39,15 @@ restart_klipper() {
     fi
 }
 
+build_linux_mcu_fw() {
+    local cpu_count nice_count
+    cpu_count="$(nproc)"
+    nice_count=$((cpu_count - 1))
+    printf "Trying to build linux-host-mcu with %d cpu cores ...\n" "${nice_count}"
+    pushd ~/klipper &> /dev/null
+    make -j"${nice_count}"
+}
+
 ### Ask for sudo!
 printf "Some actions require 'sudo' permissions!\n"
 printf "Please type in your sudo password if asked!\n"
@@ -70,7 +79,9 @@ else
     restart_klipper
     exit 1
 fi
+
 ### build firmware
+build_linux_mcu_fw
 
 ### Restart klipper service
 restart_klipper
