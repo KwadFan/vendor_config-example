@@ -44,6 +44,7 @@ if ! systemctl is-active --quiet klipper.service ;then
     sudo systemctl start klipper.service
 fi
 
-printf "Hellloooo foo!\n"
+### Done message
+printf "Build and Install of linux-host-mcu done!\nGood bye...\n"
 
 exit 0
