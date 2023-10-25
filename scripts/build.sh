@@ -36,13 +36,13 @@ main() {
 
     printf "%s" "${title}"
 
-    if [[ "$#" -eq 0 ]]; then
+    if [[ $# -eq 0 ]]; then
         printf "ERROR: Too few arguments! Exiting!\n"
         printf "Please provide a mcu config name! Exiting!\n"
         exit 1
     fi
 
-    if [[ "$#" -gt 1 ]]; then
+    if [[ $# -gt 1 ]]; then
         printf "ERROR: Too many arguments! Exiting!\n"
         exit 1
     fi
