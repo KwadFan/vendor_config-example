@@ -47,6 +47,8 @@ main() {
         exit 1
     fi
 
+    find $PWD/firmware_configs -name "${1}" -type d -print
+
     printf "Trying to compile firmware for %s ...\n" "${mcu_board}"
 
     ### Ask for sudo!
