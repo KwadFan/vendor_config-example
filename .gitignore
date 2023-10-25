@@ -2,3 +2,4 @@
 # NOTE: This has to be kept, to keep this repo updateable
 firmware_binaries/**/*.bin
 firmware_binaries/**/*.uf2
+firmware_binaries/**/*.elf.hex
