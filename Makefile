@@ -13,6 +13,8 @@
 .DEFAULT_GOAL := help
 .PHONY: help
 
+clean: ## Run clean and distclean inside klipper directory.
+	@bash -c'cd ~/klipper && make clean && make distclean'
 
 btt-skrpico-v1.0: ## Compiles Firmware for BTT SKR Mini E3 V2 (USB Variant).
 	@bash -c 'scripts/build.sh btt-skrmini-E3-v2'
