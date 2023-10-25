@@ -29,12 +29,12 @@ set -Ee
 main() {
     local mcu_board title
     mcu_board="${1}"
-    title="Ahoi! Firmware Build Helper of vendor_config ...\n"
+    title="Ahoi! Firmware Build Helper of vendor_config ..."
     ### import core library
     # shellcheck source=lib/core.sh
     . scripts/lib/core.sh
 
-    printf "%s" "${title}"
+    printf "%s\n" "${title}"
 
     if [[ $# -eq 0 ]]; then
         printf "ERROR: Too few arguments! Exiting!\n"
