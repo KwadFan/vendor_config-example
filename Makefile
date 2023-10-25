@@ -29,6 +29,10 @@ update: ## Tries to pull latest updates from repository.
 	@printf "Fetch and pull from remote repository ...\n"
 	@git fetch && git pull
 
+list-serial: ## List serial devices (by-id)
+	@printf "List connected serial devices (by-id)\n\n"
+	@find /dev/serial/by-id -type l -print
+
 help: ## Shows this help.
 	@printf "vendor_config helper\n"
 	@printf "Usage:\n\n"
