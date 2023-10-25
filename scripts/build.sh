@@ -47,7 +47,10 @@ main() {
         exit 1
     fi
 
-    find $PWD/firmware_configs -name "${1}" -type d -print
+    if [[ ! -f "${PWD}/firmware_configs/${mcu_board}/config" ]]; then
+        printf "ERROR: Configuration file for %s does not exist! Exiting!\n" "${mcu_board}"
+        exit 1
+    fi
 
     printf "Trying to compile firmware for %s ...\n" "${mcu_board}"
 
@@ -83,7 +86,6 @@ main() {
 
     exit 0
 }
-
 
 #### MAIN
 main "${@}"
