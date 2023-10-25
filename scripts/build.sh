@@ -63,11 +63,14 @@ main() {
     ### Clean up, from previous builds
     clean_previous_builds
 
-    # ### Copy config
+    ### Copy config
     copy_config "${mcu_board}"
 
-    # ### build firmware
+    ### build firmware
     build_firmware "${mcu_board}"
+
+    ### copy firmware
+
 
     ### Restart klipper service
     restart_klipper
