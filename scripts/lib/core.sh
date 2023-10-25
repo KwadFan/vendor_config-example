@@ -55,6 +55,16 @@ copy_config() {
     fi
 }
 
+build_firmware() {
+    local cpu_count name
+    cpu_count="$(nproc)"
+    name="${1}"
+    printf "Trying to build %s with %d cpu cores ...\n" "${name}" "${cpu_count}"
+    pushd ~/klipper &> /dev/null
+    make -j"${cpu_count}"
+    popd &> /dev/null
+}
+
 ## service related
 stop_service() {
     local service

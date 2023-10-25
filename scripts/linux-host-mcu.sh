@@ -73,12 +73,7 @@ copy_linux_host_mcu_config() {
 }
 
 build_linux_mcu_fw() {
-    local cpu_count
-    cpu_count="$(nproc)"
-    printf "Trying to build linux-host-mcu with %d cpu cores ...\n" "${cpu_count}"
-    pushd ~/klipper &> /dev/null
-    make -j"${cpu_count}"
-    popd &> /dev/null
+    build_firmware "linux-host-mcu"
 }
 
 install_linux_host_mcu() {
