@@ -73,8 +73,8 @@ main() {
     # ### Enable klipper_mcu service
     # enable_linux_host_mcu_service
 
-    # ### Restart klipper service
-    # restart_klipper
+    ### Restart klipper service
+    restart_klipper
 
     # ### Done message
     printf "Compile of %s firmware was successful...\n" "${mcu_board}"
