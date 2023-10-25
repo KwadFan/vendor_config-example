@@ -70,7 +70,7 @@ main() {
     build_firmware "${mcu_board}"
 
     ### copy firmware
-
+    copy_firmware "${mcu_board}"
 
     ### Restart klipper service
     restart_klipper
@@ -79,6 +79,14 @@ main() {
     printf "Compile of %s firmware was successful...\n" "${mcu_board}"
 
     exit 0
+}
+### Helper func
+get_firmware_file_path() {
+    find ~/klipper/out -name "*.bin" -o -name "*.uf2" -o -name "*.elf.hex"
+}
+
+copy_firmware() {
+    cp -v "$(get_firmware_file_path)" "${PWD}/firmware_configs/${1}/"
 }
 
 #### MAIN
