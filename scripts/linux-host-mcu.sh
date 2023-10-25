@@ -65,9 +65,6 @@ main() {
 
 
 ### Helper funcs
-
-
-
 copy_linux_host_mcu_config() {
     copy_config linux-host-mcu
 }
