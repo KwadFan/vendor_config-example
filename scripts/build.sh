@@ -64,19 +64,10 @@ main() {
     clean_previous_builds
 
     # ### Copy config
-    # copy_linux_host_mcu_config
+    copy_config "${mcu_board}"
 
     # ### build firmware
-    # build_linux_mcu_fw
-
-    # ### Install linux-host-mcu binary (/usr/local/bin/klipper_mcu)
-    # install_linux_host_mcu
-
-    # ### Install systemd service file
-    # install_linux_host_mcu_service
-
-    # ### Enable klipper_mcu service
-    # enable_linux_host_mcu_service
+    build_firmware "${mcu_board}"
 
     ### Restart klipper service
     restart_klipper
