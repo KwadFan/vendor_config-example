@@ -30,7 +30,7 @@ update: ## Tries to pull latest updates from repository.
 	@git fetch && git pull
 
 list-serial: ## List serial devices (by-id)
-	@printf "List connected serial devices (by-id)\n\n"
+	@printf "List connected serial devices (by-id) ...\n\n"
 	@find /dev/serial/by-id -type l -print
 
 help: ## Shows this help.
