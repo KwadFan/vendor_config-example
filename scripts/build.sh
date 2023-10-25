@@ -84,4 +84,4 @@ main() {
 
 
 #### MAIN
-main "${1}"
+main "${@}"
