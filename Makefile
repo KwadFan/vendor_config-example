@@ -14,6 +14,7 @@
 .PHONY: help
 
 clean: ## Run clean and distclean inside klipper directory.
+	@printf "Cleaning previous builds in ~/klipper ...\n"
 	@bash -c 'cd ~/klipper && make clean && make distclean'
 
 btt-skrmini-e3-v2: ## Compiles Firmware for BTT SKR Mini E3 V2 (USB Variant).
