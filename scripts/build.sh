@@ -29,7 +29,7 @@ set -Ee
 main() {
     local mcu_board title
     mcu_board="${1}"
-    title="Ahoi! Firmware Build Helper of vendor_config ..."
+    title="Ahoi! Firmware Build Helper of %s ..." "${PWD#/*config/}"
     ### import core library
     # shellcheck source=lib/core.sh
     . scripts/lib/core.sh
