@@ -15,7 +15,7 @@
 
 clean: ## Run clean and distclean inside klipper directory.
 	@cd ~/klipper
-	@make clean && make distclean
+	${MAKE} clean && make distclean
 
 btt-skrpico-v1.0: ## Compiles Firmware for BTT SKR Mini E3 V2 (USB Variant).
 	@bash -c 'scripts/build.sh btt-skrmini-E3-v2'
