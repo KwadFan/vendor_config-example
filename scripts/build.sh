@@ -63,14 +63,20 @@ main() {
     ### Clean up, from previous builds
     clean_previous_builds
 
-    ### Copy config
-    copy_config "${mcu_board}"
 
-    ### build firmware
-    build_firmware "${mcu_board}"
+    ### Multi build trap
+    if [[ "${mcu_board}" == "all" ]]; then
+        echo "Multi MCU Build"
+    else
+        ### Copy config
+        copy_config "${mcu_board}"
 
-    ### copy firmware
-    copy_firmware "${mcu_board}"
+        ### build firmware
+        build_firmware "${mcu_board}"
+
+        ### copy firmware
+        copy_firmware "${mcu_board}"
+    fi
 
     ### Restart klipper service
     restart_klipper
