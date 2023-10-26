@@ -96,7 +96,6 @@ multi_mcu_build() {
     local configs
     local -a mcu_boards
     configs="$(get_firmware_configs)"
-    configs="${configs##*/}"
     echo "${configs}"
     #mapfile -t mcu_boards <<< "$(get_firmware_configs)"
 
@@ -114,7 +113,7 @@ copy_firmware() {
 
 get_firmware_configs() {
     find "${PWD}"/firmware_configs -mindepth 1 -maxdepth 1 \
-        -type d -not -path "linux-mcu-host"
+        -type d -not -path "linux-mcu-host" -exec basename {} \;
 }
 
 #### MAIN
