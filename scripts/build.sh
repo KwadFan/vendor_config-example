@@ -96,7 +96,7 @@ multi_mcu_build() {
     local configs
     local -a mcu_boards
     configs="$(get_firmware_configs)"
-    configs="${configs##/*}"
+    configs="${configs##*/}"
     echo "${configs}"
     #mapfile -t mcu_boards <<< "$(get_firmware_configs)"
 
