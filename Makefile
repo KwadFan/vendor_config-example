@@ -13,6 +13,10 @@
 .DEFAULT_GOAL := help
 .PHONY: help
 
+all: ## Builds all firmwares present in firmware_configs
+	@printf "This will take a while ... Please be patient!\n"
+	@bash -c 'scripts/build.sh all'
+
 clean: ## Run clean and distclean inside klipper directory.
 	@printf "Cleaning previous builds in ~/klipper ...\n"
 	@bash -c 'cd ~/klipper && make clean && make distclean'
