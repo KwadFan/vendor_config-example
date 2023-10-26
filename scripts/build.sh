@@ -68,7 +68,7 @@ main() {
     restart_klipper
 
     ### good bye msg
-    printf "All tasks done! ...\nGood bye\n"
+    printf "All tasks done! ...\nGood bye ...\n"
 
     exit 0
 }
