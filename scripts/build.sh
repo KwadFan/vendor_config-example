@@ -96,9 +96,9 @@ multi_mcu_build() {
     local config
     local -a mcu_boards
     mapfile -t mcu_boards <<< "$(get_firmware_configs)"
-    printf "Trying to build firmwares for: %s!\n" "${mcu_boards[@]}"
+    printf "Trying to build firmwares for: %s!\n" "${mcu_boards[*]}"
     printf "This will take a while ... Please be patient!\n"
-    for config in "${mcu_boards[@]}"; do
+    for mcu_board in "${mcu_boards[@]}"; do
         printf "Trying to compile firmware for %s ...\n" "${config}"
 
         ### Clean up, from previous builds
