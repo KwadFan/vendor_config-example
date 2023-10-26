@@ -3,3 +3,9 @@
 firmware_binaries/**/*.bin
 firmware_binaries/**/*.uf2
 firmware_binaries/**/*.elf.hex
+
+# Needed for development if no klipper is installed
+tmp
+tmp/**
+klipper
+klipper/**
