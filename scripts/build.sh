@@ -93,7 +93,11 @@ single_mcu_build() {
 }
 
 multi_mcu_build() {
-    printf "Has to be written!\n"
+    local -a mcu_boards
+    echo ""$(get_firmware_configs)"
+
+    #mapfile -t mcu_boards <<< "$(get_firmware_configs)"
+
 }
 
 get_firmware_file_path() {
@@ -104,6 +108,11 @@ get_firmware_file_path() {
 
 copy_firmware() {
     cp -v "$(get_firmware_file_path)" "${PWD}/firmware_configs/${1}/"
+}
+
+get_firmware_configs() {
+    find "${PWD}"/firmware_configs -mindepth 1 -maxdepth 1 \
+        -type -d -not -path "linux-mcu-host"
 }
 
 #### MAIN
