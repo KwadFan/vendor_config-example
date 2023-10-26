@@ -82,7 +82,9 @@ main() {
 }
 ### Helper func
 get_firmware_file_path() {
-    find ~/klipper/out -name "*.bin" -o -name "*.uf2" -o -name "*.elf.hex"
+    find ~/klipper/out -name "klipper.bin" \
+        -o -name "klipper.uf2" \
+        -o -name "klipper.elf.hex"
 }
 
 copy_firmware() {
