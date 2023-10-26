@@ -111,7 +111,7 @@ copy_firmware() {
 
 get_firmware_configs() {
     find "${PWD}"/firmware_configs -mindepth 1 -maxdepth 1 \
-        -type d -not -path "linux-mcu-host" -exec basename {} \;
+        -type d -not -path "*/linux-mcu-host" -exec basename {} \;
 }
 
 #### MAIN
