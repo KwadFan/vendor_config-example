@@ -53,9 +53,6 @@ main() {
     ### Stop klipper first!
     stop_klipper
 
-    ### Clean up, from previous builds
-    clean_previous_builds
-
     case "${mcu_board}" in
         all)
             multi_mcu_build
@@ -80,6 +77,9 @@ single_mcu_build() {
         exit 1
     fi
 
+    ### Clean up, from previous builds
+    clean_previous_builds
+
     printf "Trying to compile firmware for %s ...\n" "${1}"
 
     ### Copy config
@@ -93,9 +93,26 @@ single_mcu_build() {
 }
 
 multi_mcu_build() {
+    local config
     local -a mcu_boards
     mapfile -t mcu_boards <<< "$(get_firmware_configs)"
-    echo "${mcu_boards[@]}"
+    printf "Trying to build firmwares for: %s!\n" "${mcu_boards[@]}"
+    printf "This will take a while ... Please be patient!\n"
+    for config in "${mcu_boards[@]}"; do
+        printf "Trying to compile firmware for %s ...\n" "${config}"
+
+        ### Clean up, from previous builds
+        clean_previous_builds
+
+        ### Copy config
+        copy_config "${mcu_board}"
+
+        ### build firmware
+        build_firmware "${mcu_board}"
+
+        ### copy firmware
+        copy_firmware "${mcu_board}"
+    done
 
 }
 
@@ -110,6 +127,7 @@ copy_firmware() {
 }
 
 get_firmware_configs() {
+    # strip out linux-host-mcu, because has special build chain..
     find "${PWD}"/firmware_configs -mindepth 1 -maxdepth 1 \
         -type d -not -path "*/linux-host-mcu" -exec basename {} \;
 }
