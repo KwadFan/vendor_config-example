@@ -47,14 +47,6 @@ main() {
         exit 1
     fi
 
-    if [[ ! -f "${PWD}/firmware_configs/${mcu_board}/config" ]] \
-    && [[ "${1}" != "all" ]]; then
-        printf "ERROR: Configuration file for %s does not exist! Exiting!\n" "${mcu_board}"
-        exit 1
-    fi
-
-    printf "Trying to compile firmware for %s ...\n" "${mcu_board}"
-
     ### Ask for sudo!
     ask_for_sudo
 
@@ -64,20 +56,14 @@ main() {
     ### Clean up, from previous builds
     clean_previous_builds
 
-
-    ### Multi build trap
-    if [[ "${mcu_board}" == "all" ]]; then
-        echo "Multi MCU Build"
-    else
-        ### Copy config
-        copy_config "${mcu_board}"
-
-        ### build firmware
-        build_firmware "${mcu_board}"
-
-        ### copy firmware
-        copy_firmware "${mcu_board}"
-    fi
+    case "${mcu_board}" in
+        all)
+            multi_mcu_build
+            ;;
+        *)
+            single_mcu_build "${mcu_board}"
+            ;;
+    esac
 
     ### Restart klipper service
     restart_klipper
@@ -87,7 +73,26 @@ main() {
 
     exit 0
 }
+
 ### Helper func
+single_mcu_build() {
+    if [[ ! -f "${PWD}/firmware_configs/${1}/config" ]]; then
+        printf "ERROR: Configuration file for %s does not exist! Exiting!\n" "${1}"
+        exit 1
+    fi
+
+    printf "Trying to compile firmware for %s ...\n" "${1}"
+
+    ### Copy config
+    copy_config "${mcu_board}"
+
+    ### build firmware
+    build_firmware "${mcu_board}"
+
+    ### copy firmware
+    copy_firmware "${mcu_board}"
+}
+
 get_firmware_file_path() {
     find ~/klipper/out -name "klipper.bin" \
         -o -name "klipper.uf2" \
