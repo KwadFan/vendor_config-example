@@ -94,7 +94,7 @@ single_mcu_build() {
 
 multi_mcu_build() {
     local -a mcu_boards
-    echo ""$(get_firmware_configs)"
+    echo "$(get_firmware_configs)"
 
     #mapfile -t mcu_boards <<< "$(get_firmware_configs)"
 
