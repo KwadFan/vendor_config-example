@@ -67,6 +67,9 @@ main() {
     ### Restart klipper service
     restart_klipper
 
+    ### good bye msg
+    printf "All tasks done! ...\nGood bye\n"
+
     exit 0
 }
 
