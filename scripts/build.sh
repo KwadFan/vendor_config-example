@@ -63,11 +63,6 @@ main() {
     ### Clean up, from previous builds
     clean_previous_builds
 
-    ### Move exiting firmware to *.old
-    if [[ -f "${PWD}/firmware_configs/${mcu_board}/klipper.*" ]]; then
-        mv "${PWD}"/firmware_configs/"${mcu_board}"/klipper.{*,*.old}
-    fi
-
     ### Copy config
     copy_config "${mcu_board}"
 
