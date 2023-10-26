@@ -62,14 +62,13 @@ main() {
             ;;
         *)
             single_mcu_build "${mcu_board}"
+            ### Done message
+            printf "Compile of %s firmware was successful...\n" "${mcu_board}"
             ;;
     esac
 
     ### Restart klipper service
     restart_klipper
-
-    # ### Done message
-    printf "Compile of %s firmware was successful...\n" "${mcu_board}"
 
     exit 0
 }
@@ -91,6 +90,10 @@ single_mcu_build() {
 
     ### copy firmware
     copy_firmware "${mcu_board}"
+}
+
+multi_mcu_build() {
+    printf "Has to be written!\n"
 }
 
 get_firmware_file_path() {
