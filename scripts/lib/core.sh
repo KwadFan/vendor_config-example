@@ -27,6 +27,21 @@ ask_for_sudo() {
     sudo printf "\n"
 }
 
+get_max_mem() {
+    awk 'NR==1 {print $2}' <<< /proc/meminfo
+}
+
+cpu_count() {
+    if [[ $(get_max_mem) -gt 524288 ]] \
+    && [[ $(nproc) -gt 1 ]]; then
+        nproc
+    elif [[ $(get_max_mem) -lt 524288 ]] \
+    && [[ $(nproc) -gt 1 ]]; then
+        echo "$(($(nproc) - 1))"
+    else
+        echo "1"
+    fi
+}
 
 ## build related
 clean_previous_builds() {
@@ -56,8 +71,8 @@ copy_config() {
 }
 
 build_firmware() {
-    local cpu_count name
-    cpu_count="$(nproc)"
+    local name
+    cpu_count="$(cpu_count)"
     name="${1}"
     printf "Trying to build %s with %d cpu cores ...\n" "${name}" "${cpu_count}"
     pushd ~/klipper &> /dev/null
