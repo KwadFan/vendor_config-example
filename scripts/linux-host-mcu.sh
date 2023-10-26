@@ -40,10 +40,10 @@ main() {
     clean_previous_builds
 
     ### Copy config
-    copy_linux_host_mcu_config
+    copy_config "linux-host-mcu"
 
     ### build firmware
-    build_linux_mcu_fw
+    build_firmware "linux-host-mcu"
 
     ### Install linux-host-mcu binary (/usr/local/bin/klipper_mcu)
     install_linux_host_mcu
@@ -52,7 +52,7 @@ main() {
     install_linux_host_mcu_service
 
     ### Enable klipper_mcu service
-    enable_linux_host_mcu_service
+    enable_service klipper-mcu.service
 
     ### Restart klipper service
     restart_klipper
@@ -65,14 +65,6 @@ main() {
 
 
 ### Helper funcs
-copy_linux_host_mcu_config() {
-    copy_config linux-host-mcu
-}
-
-build_linux_mcu_fw() {
-    build_firmware "linux-host-mcu"
-}
-
 install_linux_host_mcu() {
     printf "Trying to install linux-host-mcu ...\n"
     pushd ~/klipper &> /dev/null
@@ -89,10 +81,6 @@ install_linux_host_mcu_service() {
         sudo cp -v ./scripts/klipper-mcu.service /etc/systemd/system/
         popd &> /dev/null
     fi
-}
-
-enable_linux_host_mcu_service() {
-    enable_service klipper-mcu.service
 }
 
 #### MAIN
