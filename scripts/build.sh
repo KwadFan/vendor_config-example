@@ -126,7 +126,12 @@ get_firmware_file_path() {
 }
 
 copy_firmware() {
-    cp -v "$(get_firmware_file_path)" "${PWD}/firmware_configs/${1}/"
+    local out
+    out="${PWD}/firmware_binaries/${1}"
+    if [[ ! -d "${out}" ]]; then
+        mkdir -p "${out}"
+    fi
+    cp -v "$(get_firmware_file_path)" "${PWD}/firmware_binaries/${1}/"
 }
 
 get_firmware_configs() {
