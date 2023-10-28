@@ -116,7 +116,6 @@ multi_mcu_build() {
         ### copy firmware
         copy_firmware "${mcu_board}"
     done
-
 }
 
 get_firmware_file_path() {
