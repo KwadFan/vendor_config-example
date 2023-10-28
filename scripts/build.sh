@@ -75,15 +75,17 @@ main() {
 
 ### Helper func
 single_mcu_build() {
-    if [[ ! -f "${PWD}/firmware_configs/${1}/config" ]]; then
-        printf "ERROR: Configuration file for %s does not exist! Exiting!\n" "${1}"
+    local mcu_board
+    mcu_board="${1}"
+    if [[ ! -f "${PWD}/firmware_configs/${mcu_board}/config" ]]; then
+        printf "ERROR: Configuration file for %s does not exist! Exiting!\n" "${mcu_board}"
         exit 1
     fi
 
     ### Clean up, from previous builds
     clean_previous_builds
 
-    printf "Trying to compile firmware for %s ...\n" "${1}"
+    printf "Trying to compile firmware for %s ...\n" "${mcu_board}"
 
     ### Copy config
     copy_config "${mcu_board}"
